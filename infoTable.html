@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>submitted form data</title>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                border: rgb(78, 77, 77) 2px solid;
+                width: 80%;
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            th {
+                background-color: beige;
+            }
+
+            /* tr:nth-child(even) {
+                background-color: #e9dfdf;
+            } */
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <table id = "userTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Zipcode</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="r1">
+                        <td id="front"></td>
+                        <td id="firstName"></td>
+                        <td id="lastName"></td>
+                        <td id="email"></td>
+                        <td id="phoneNumber"></td>
+                        <td id="zipcode"></td>
+                        <td id="source"></td>
+                    </tr>
+                <thead>
+                    <tr>
+                        <th>Hobby</th>
+                        <th>Favourate</th>
+                        <th colspan="5">Comments</th>
+                    </tr>
+                </thead>
+                    <tr id="r2">
+                        <td id="h1"></td>
+                        <td id="h1des"></td>
+                        <td id="comment" colspan="5"></td>
+                    </tr>
+                    <tr id="r3">
+                        <td id="h2"></td>
+                        <td id="h2des"></td>
+                        <td colspan="5"></td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <input type = "button" name = "Get Data" value = "Get Data" onclick="getData();">
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <script>
+            function getData(){
+                var data = [];
+                var index = [];
+                var tableURL = window.location.search.substr(1);
+                // alert(tableURL);
+                if(tableURL!=""){
+                    var partURL = decodeURIComponent(tableURL).split('&'); 
+                    for(var i=0;i<partURL.length;i++){
+                        if(partURL[i] != ""){
+                            var p = partURL[i].split("=");
+                            if(p.length == 2 && p[1] != ''){
+                                data.push(p[1].replace('+',' '));
+                                index.push(p[0].replace('+',' '));
+                            }
+                        }
+                    }
+                    // alert(data[0]);
+                    document.getElementById("front").innerHTML = data[0];
+                    document.getElementById("firstName").innerHTML = data[1];
+                    document.getElementById("lastName").innerHTML = data[2];
+                    document.getElementById("email").innerHTML = data[3];
+                    document.getElementById("phoneNumber").innerHTML = data[4];
+                    document.getElementById("zipcode").innerHTML = data[5];
+                    
+                    var sourceResult = "";
+                    for(var j=6;j<=8;j++){
+                        if(index[j]=="source"){
+                            sourceResult = sourceResult + data[j] + " ";
+                        }else{
+                            var temp = j;
+                            break;
+                        }
+                        var temp = j+1;
+                    }
+                    document.getElementById("source").innerHTML = sourceResult;
+                    
+                    if(index[temp] == "text"){ // no hobby choosed, display comments
+                        document.getElementById("comment").innerHTML = data[temp];
+                        document.getElementById("h1").innerHTML = "N/A";
+                        document.getElementById("h1des").innerHTML = "N/A";
+                        document.getElementById("r3").style.display = "none";
+                    }else{                // show hobby and comments          
+                        if(index[temp] == index[temp+1]){ // two hobbys
+                            document.getElementById("h1").innerHTML = data[temp];
+                            document.getElementById("h2").innerHTML = data[++temp];
+                            document.getElementById("h1des").innerHTML = data[++temp];
+                            document.getElementById("h2des").innerHTML = data[++temp];
+                            temp++;
+                        }else{ // one hobby
+                            document.getElementById("h1").innerHTML = data[temp];
+                            document.getElementById("h1des").innerHTML = data[++temp];
+                            temp++;
+                            document.getElementById("r3").style.display = "none";
+                        }
+                        document.getElementById("comment").innerHTML = data[temp];
+                    }
+
+                }
+            }
+            
+            
+        </script>
+
+
+    </body>
+
+</html>

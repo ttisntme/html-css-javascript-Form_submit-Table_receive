@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+	<head>
+  		<title>Feedback</title>
+  		<style>
+			label {	float: left;
+					width: 200px;}
+			#container{
+				width: 700px;
+				margin: auto;
+				background-color: beige;
+			} 
+			main{
+				padding: 50px;
+			}
+  		</style>
+		
+
+ 	</head>
+	 <script src="script.js"></script>
+ 	<body>
+ 		<div id="container">
+	 
+			<main>
+			<h2>Feeback</h2>
+			<h3>Love something? Hate something? Let us know!</h3>
+				Note : Fields marked with an asterisk(*) are mandatory
+				<br><br>
+				<form method="GET" action="infoTable.html" onreset="resetAll()">     <!-- https://reqres.in/api/users once reset the form, set submit button disabled -->
+					<label>Title*:</label>
+					<input type="radio" name="title" id="Miss" value="Miss" required="required"/>Miss
+					<input type="radio" name="title" id="Mr." value="Mr." required="required"/>Mr.
+					<input type="radio" name="title" id="Mrs." value="Mrs." required="required"/>Mrs.
+					<br><br>
+					<label for="firstName">First Name*:</label>
+					<input type="text" name="firstName" id="firstName" placeholder="First Name" onblur="validateInput(this, 1, 'FName')" required="required"/>	
+					<br><br>
+					<div id = "errorMsgFName" style="display: none; color: red;">
+                        Invalid input for your first name. Only text values permitted
+                    </div>
+                    <br><br>
+
+					<label for="lastName">Last Name*:</label>
+					<input type="text" name="lastName" id="lastName" placeholder="Last Name" onblur="validateInput(this, 1, 'LName')" required="required"/>
+					<br><br>
+					<div id = "errorMsgLName" style="display: none; color: red;">
+                        Invalid input for your last name. Only text values permitted
+                    </div>
+                    <br><br>
+
+					<label for="emailId">Email Id*:</label>
+					<input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com" onblur="validateInput(this, 2)" required="required"/>
+					<br><br>
+					<div id = "errorMsgEmailId" style="display: none; color: red;">
+                        Invalid input for your email id. Please enter email id in proper format.
+                    </div>
+                    <br><br>
+
+					<label for="phoneNumber">Phone Number*:</label>
+					<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" onblur="validateInput(this, 3)" required="required"/>
+					<br><br>
+					<div id = "errorMsgPhone" style="display: none; color: red;">
+                        Invalid input for your phone number. Only numeric values are permitted and in the requested format xxx-xxx-xxxx
+                    </div>
+                    <br><br>
+
+					<label for="zipCode">ZipCode*:</label>
+					<input type="text" name="zipCode" id="zipCode" placeholder="xxxxx" onblur="validateInput(this, 4)" required="required"/>
+					<br><br>
+					<div id = "errorMsgZipCode" style="display: none; color: red;">
+                        Invalid input for your zipcode. Only numeric values are permitted and in the requested format xxxxx
+                    </div>
+                    <br><br>
+					
+					<label for="source">How did you hear*:</label>
+					<input type='checkbox' name="source" value="facebook" /> Facebook
+					<input type='checkbox' name="source" value="google" /> Google
+					<input type='checkbox' name="source" value="yelp" /> Yelp 
+					<br><br> 
+					
+					<label for="hobby">What do you love best:</label>
+					<select id="hobby" value="" onchange="hobbyChoose(this.value)">
+						<option value="">Secret</option>
+						<option value="1">Music</option>
+					　　<option value="2">Sports</option>
+						<option value="3">Art</option>
+						<option value="4">Literature</option>
+						<option value="5">Indoor</option>
+					</select>
+					<br><br> 
+					<div id="hobby1" style="display: none;">
+						<label for="uHobby1">you like:</label>
+						<input type='checkbox' name="uHobby1" value="Play_Instruments" onclick="uHobbyCheck(1)"/> Play_Instruments
+						<input type='checkbox' name="uHobby1" value="Listen_to_music" onclick="uHobbyCheck(1)"/> Listen_to_Music
+						<br>
+						<input type="text" name="hobby1text1" id="hobby1text1" placeholder="input your favourate instruments" style="display: none; width: 400px;"/>
+						<input type="text" name="hobby1text2" id="hobby1text2" placeholder="input your favourate songs" style="display: none; width: 400px;" />
+						<br>
+					</div>
+					<div id="hobby2" style="display: none;">
+						<label for="uHobby2">you like:</label>
+						<input type='checkbox' name="uHobby2" value="Basketball" onclick="uHobbyCheck(2)"/> Basketball
+						<input type='checkbox' name="uHobby2" value="Football" onclick="uHobbyCheck(2)"/> Football
+						<br>
+						<input type="text" name="hobby2text1" id="hobby2text1" placeholder="input your favourate basketball star" style="display: none; width: 400px;"/>
+						<input type="text" name="hobby2text2" id="hobby2text2" placeholder="input your favourate football star" style="display: none; width: 400px;" />
+						<br>
+					</div>
+					<div id="hobby3" style="display: none;">
+						<label for="uHobby3">you like:</label>
+						<input type='checkbox' name="uHobby3" value="Painting" onclick="uHobbyCheck(3)"/> Painting
+						<input type='checkbox' name="uHobby3" value="Sculpture" onclick="uHobbyCheck(3)"/> Sculpture
+						<br>
+						<input type="text" name="hobby3text1" id="hobby3text1" placeholder="input your favourate painting" style="display: none; width: 400px;"/>
+						<input type="text" name="hobby3text2" id="hobby3text2" placeholder="input your favourate sculpture" style="display: none; width: 400px;" />
+						<br>
+					</div>
+					<div id="hobby4" style="display: none;">
+						<label for="uHobby4">you like:</label>
+						<input type='checkbox' name="uHobby4" value="Writing" onclick="uHobbyCheck(4)"/> Writing
+						<input type='checkbox' name="uHobby4" value="Reading" onclick="uHobbyCheck(4)"/> Reading
+						<br>
+						<input type="text" name="hobby4text1" id="hobby4text1" placeholder="input your favored writer" style="display: none; width: 400px;"/>
+						<input type="text" name="hobby4text2" id="hobby4text2" placeholder="input your favored book" style="display: none; width: 400px;" />
+						<br>
+					</div>
+					<div id="hobby5" style="display: none;">
+						<label for="uHobby5">you like:</label>
+						<input type='checkbox' name="uHobby5" value="Watch_TV" onclick="uHobbyCheck(5)"/> Watch_TV
+						<input type='checkbox' name="uHobby5" value="Computer_Games" onclick="uHobbyCheck(5)"/> Computer_Games
+						<br>
+						<input type="text" name="hobby5text1" id="hobby5text1" placeholder="input your favored TV program" style="display: none; width: 400px;"/>
+						<input type="text" name="hobby5text2" id="hobby5text2" placeholder="input your favored Computer Games" style="display: none; width: 400px;" />
+						<br>
+					</div>
+
+					<br>
+					<label for="comments">Comments:</label>
+					<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
+					<br><br>
+					<input type="Submit", id="submit">
+					<input type="Reset"> 
+					<br><br>
+				</form>
+			</main>
+ 		</div>
+
+		 <script> // check the checkboxs whether be checked or not
+			var checkboxSource=document.getElementsByName("source");  
+			var submitButton=document.getElementById("submit");
+			function checkCheckBox(){
+				// alert("check!");
+				for(var i=0;i<checkboxSource.length;i++){
+					if(checkboxSource[i].checked){
+						submitButton.disabled = false;  // able the submit button
+						return;
+					};
+				}
+				submitButton.disabled = true; // disable the submit button
+			}
+			for(var i=0;i<checkboxSource.length;i++){
+				checkboxSource[i].onclick = checkCheckBox;    // response every time click the checkboxs
+			}
+			window.onload = checkCheckBox; // at the very first check the status and disabele the submit button at beginning
+
+			function resetAll(){ // onreset
+				submitButton.disabled = true;
+
+				for(var i=1;i<=5;i++){   // clear all items
+					for(var j=1;j<=2;j++){
+						document.getElementById("hobby" + i + "text" + j).required = false;
+						document.getElementById("hobby" + i + "text" + j).style.display = "none";
+						document.getElementsByName("uHobby" + i)[j-1].checked = false;
+					}
+				}
+				document.getElementById("hobby1").style.display = "none";
+				document.getElementById("hobby2").style.display = "none";
+				document.getElementById("hobby3").style.display = "none";
+				document.getElementById("hobby4").style.display = "none";
+				document.getElementById("hobby5").style.display = "none";
+			}
+		</script>
+
+	</body>
+
+</html>
